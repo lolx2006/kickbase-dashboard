@@ -1,36 +1,169 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kickbase Dashboard
 
-## Getting Started
+Ein umfangreicher, inoffizieller Webclient für [Kickbase](https://www.kickbase.com/) — das Fantasy-Bundesliga-Managerspiel. Gebaut mit Next.js 16, React 19 und TailwindCSS 4.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-06B6D4?logo=tailwindcss)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+---
+
+## Features
+
+### Kern-Features
+| Feature | Beschreibung |
+|---|---|
+| **Dashboard** | Manager-Ranking, letzte Transfers, Budget-Überblick, Team-Wert |
+| **Transfermarkt** | Alle Spieler auf dem Markt mit Suche, Positionsfilter, Sortierung, Marktwert-Chart und Gebot-Funktion |
+| **Live-Spieltag** | Echtzeit-Punkte aller Manager mit Auto-Refresh (30s), Navigation zu vergangenen Spieltagen |
+| **Mein Team** | Aufstellung gruppiert nach Position mit Marktwert und Punkten |
+
+### Analyse & Statistiken
+| Feature | Beschreibung |
+|---|---|
+| **Spieltage** | Alle Bundesliga-Spieltage mit aufklappbaren Match-Details und Top-Spielern beider Teams |
+| **Ranking-Verlauf** | Historischer Ranking-Verlauf aller Manager als interaktives Diagramm |
+| **Top-Spieler** | Die besten Spieler der Saison nach Gesamtpunkten |
+| **Spieler-Suche** | Globale Spielersuche über alle Bundesliga-Vereine |
+| **Bundesliga-Tabelle** | Aktuelle Tabelle mit CL/EL/Conference-League/Abstieg-Markierungen |
+
+### Transfer & Markt
+| Feature | Beschreibung |
+|---|---|
+| **Gebots-Details** | Eigene Gebote und Höchstgebote im Transfermarkt-Modal sichtbar |
+| **Transfer-Historie** | Kauf/Verkauf-Verlauf pro Spieler direkt im Modal |
+| **Transfer-Log** | Aggregierte Transfer-Historie aller eigenen Spieler als Timeline |
+| **Transfer-Kalkulator** | Budget-Planung für Käufe und Verkäufe |
+
+### Weitere Features
+| Feature | Beschreibung |
+|---|---|
+| **Manager-Übersicht** | Detailansicht aller Liga-Manager mit Team-Wert und Spieleranzahl |
+| **Watchlist** | Spieler beobachten und Marktwert-Entwicklung verfolgen |
+| **Liga-Feed** | Transfer-Aktivitäten der Liga gruppiert nach Datum |
+| **Liga-Einstellungen** | Übersicht der Liga-Konfiguration |
+
+---
+
+## Tech Stack
+
+| Technologie | Version | Verwendung |
+|---|---|---|
+| [Next.js](https://nextjs.org/) | 16 | Framework (App Router, Server Components) |
+| [React](https://react.dev/) | 19 | UI-Library |
+| [TailwindCSS](https://tailwindcss.com/) | 4 | Styling |
+| [Lucide React](https://lucide.dev/) | 0.577+ | Icons |
+| [Recharts](https://recharts.org/) | 3.8+ | Diagramme & Charts |
+| [date-fns](https://date-fns.org/) | 4.1+ | Datumsformatierung |
+| [TypeScript](https://www.typescriptlang.org/) | 5 | Typsicherheit |
+
+---
+
+## Installation & Setup
+
+### Voraussetzungen
+- [Node.js](https://nodejs.org/) >= 18
+- Ein [Kickbase](https://www.kickbase.com/) Konto
+
+### Schnellstart
 
 ```bash
+# Repository klonen
+git clone https://github.com/viatorlipsia161/kickbase-dashboard.git
+cd kickbase-dashboard
+
+# Abhängigkeiten installieren
+npm install
+
+# Entwicklungsserver starten
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Öffne [http://localhost:3000](http://localhost:3000) im Browser und melde dich mit deinen Kickbase-Zugangsdaten an.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Windows: Start per Doppelklick
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Die Datei `start.bat` startet den Server automatisch und öffnet den Browser:
 
-## Learn More
+```batch
+start.bat
+```
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Projektstruktur
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+kickbase-dashboard/
+├── src/
+│   ├── app/
+│   │   ├── api/proxy/       # Server-side API-Proxy (CORS-Umgehung)
+│   │   ├── login/           # Login-Seite
+│   │   ├── dashboard/       # Dashboard mit Ranking + Transfers
+│   │   ├── market/          # Transfermarkt mit Geboten & Marktwert-Charts
+│   │   ├── live/            # Live-Spieltag mit Spieltag-Navigation
+│   │   ├── team/            # Eigenes Team
+│   │   ├── matchdays/       # Spieltage mit Match-Details
+│   │   ├── table/           # Bundesliga-Tabelle
+│   │   ├── ranking/         # Ranking-Verlauf (Chart)
+│   │   ├── top-players/     # Top-Spieler der Saison
+│   │   ├── managers/        # Manager-Übersicht
+│   │   ├── search/          # Spieler-Suche
+│   │   ├── watchlist/       # Watchlist
+│   │   ├── calculator/      # Transfer-Kalkulator
+│   │   ├── transfers/       # Transfer-Log (Timeline)
+│   │   ├── feed/            # Liga-Feed
+│   │   └── settings/        # Liga-Einstellungen
+│   ├── components/
+│   │   ├── app-shell.tsx    # Layout-Wrapper
+│   │   └── sidebar.tsx      # Navigation mit Liga-Auswahl
+│   ├── context/
+│   │   └── auth-context.tsx # Auth-State (Login, Token, Liga-Auswahl)
+│   └── lib/
+│       ├── kickbase-api.ts  # API-Client (alle Kickbase v4 Endpunkte)
+│       └── utils.ts         # Hilfsfunktionen (Formatierung, Positionen)
+├── start.bat                # Windows-Startskript
+├── package.json
+└── tsconfig.json
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## API
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Dieses Projekt kommuniziert mit der **inoffiziellen Kickbase API v4** (`https://api.kickbase.com/v4/`). Alle API-Aufrufe werden über einen serverseitigen Proxy (`/api/proxy`) geleitet, um CORS-Probleme zu vermeiden.
+
+**Genutzte Endpunkte:**
+- `/v4/user/login` — Authentifizierung
+- `/v4/leagues/{id}/market` — Transfermarkt
+- `/v4/leagues/{id}/lineup` — Eigene Aufstellung
+- `/v4/leagues/{id}/ranking` — Manager-Ranking (mit Spieltag-Parameter)
+- `/v4/leagues/{id}/live` — Live-Performance
+- `/v4/leagues/{id}/players/{id}/stats` — Spieler-Statistiken
+- `/v4/leagues/{id}/players/{id}/marketvalue/{days}` — Marktwert-Verlauf
+- `/v4/leagues/{id}/players/{id}/transferhistory` — Transfer-Historie
+- `/v4/competitions/{id}/matchdays` — Spieltage & Matches
+- `/v4/competitions/{id}/players` — Alle Bundesliga-Spieler
+- `/v4/competitions/{id}/table` — Bundesliga-Tabelle
+
+---
+
+## Sicherheit & Datenschutz
+
+- Zugangsdaten werden **nur im Browser-Speicher** (Session) gehalten
+- Es werden **keine Daten an Dritte** übermittelt
+- Alle API-Aufrufe gehen direkt über den lokalen Proxy an die Kickbase-Server
+- **Kein Tracking, keine Cookies, keine Analytics**
+
+---
+
+## Hinweis
+
+> Dieses Projekt ist **nicht offiziell** von Kickbase autorisiert. Es nutzt die inoffizielle Kickbase API v4. Bitte verantwortungsvoll nutzen und die [Kickbase-Nutzungsbedingungen](https://www.kickbase.com/) beachten. Übermäßige API-Anfragen können zur Sperrung deines Kontos führen.
+
+---
+
+## Lizenz
+
+MIT License — siehe [LICENSE](LICENSE) für Details.
